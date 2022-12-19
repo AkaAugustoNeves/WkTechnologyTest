@@ -1,32 +1,41 @@
 .container{
     display: grid;
-    grid-template: 13vh 77vh 10vh/1fr 5fr;
+    grid-template: 8vh 84vh 8vh/2fr 10fr;
     grid-template-areas:
-      "h h"
+      "a h"
       "a m"
-      "f f";
+      "a f";
 }
 
 header {
-    background: yellow;
+    background: #FFFDFD;
     height: 100%;
     grid-area: h;
 }
 
 main {
-    background: blue;
-    height: 100%;
+    background: #FFFDFD;
     grid-area: m;
+    padding: 1rem 1rem 2rem 1rem;
+}
+
+main .content{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 aside {
-    background: green;
+    background: #131313;
     height: 100%;
     grid-area: a;
 }
 
 footer {
-    background: red;
+    background: #FFFDFD;
     height: 100%;
     grid-area: f;
 }
