@@ -11,14 +11,14 @@ public class Fisico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private double altura;
+	private float altura;
 	private int peso;
 	
 	public Fisico() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Fisico(double altura, int peso) {
+	public Fisico(float altura, int peso) {
 		this.altura = altura;
 		this.peso = peso;
 	}
@@ -31,11 +31,11 @@ public class Fisico {
 		this.id = id;
 	}
 
-	public double getAltura() {
+	public float getAltura() {
 		return altura;
 	}
 
-	public void setAltura(double altura) {
+	public void setAltura(float altura) {
 		this.altura = altura;
 	}
 

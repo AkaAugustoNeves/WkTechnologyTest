@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.augusto.testevktech.model.enuns.Sexo;
 import br.com.augusto.testevktech.model.enuns.TipoSanguineo;
 import br.com.augusto.testevktech.model.form.PessoaForm;
@@ -25,16 +27,11 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	@OneToMany(mappedBy = "pessoa")
-	private List<Documento> documentos = new ArrayList<>();
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date dataNacimento;
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "sexo_id")
 	private Sexo sexo;
-	@OneToMany(mappedBy = "pessoa")
-	private List<Filiacao> filiacoes = new ArrayList<>();
-	@OneToMany(mappedBy = "pessoa")
-	private List<Contato> contatos = new ArrayList<>();
 	@ManyToOne
 	private Endereco endereco;
 	@Enumerated(EnumType.ORDINAL)
@@ -45,8 +42,21 @@ public class Pessoa {
 	@ManyToOne
 	private Analise analise;
 
-	public Pessoa(PessoaForm form) {
-		// TODO Auto-generated constructor stub
+	@OneToMany(mappedBy = "pessoa")
+	private List<Documento> documentos = new ArrayList<>();
+	@OneToMany(mappedBy = "pessoa")
+	private List<Filiacao> filiacoes = new ArrayList<>();
+	@OneToMany(mappedBy = "pessoa")
+	private List<Contato> contatos = new ArrayList<>();
+
+	public Pessoa(PessoaForm form, Endereco endereco, Fisico fisico, Analise analise) {
+		this.nome = form.getNome();
+		//this.dataNacimento = form.getData_nasc();
+		this.sexo = form.getSexo();
+		this.endereco = endereco;
+		this.tipoSanguineo = form.getTipo_sanguineo();
+		this.fisico = fisico;
+		this.analise = analise;		
 	}
 
 	public Long getId() {

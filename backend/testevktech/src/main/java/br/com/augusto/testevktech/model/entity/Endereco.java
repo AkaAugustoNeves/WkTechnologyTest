@@ -13,7 +13,7 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String rua;
-	private String numero;
+	private int numero;
 	private String cep;
 	@ManyToOne
 	private Bairro bairro;
@@ -22,7 +22,7 @@ public class Endereco {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Endereco(String rua, String numero, String cep, Bairro bairro) {
+	public Endereco(String rua, int numero, String cep, Bairro bairro) {
 		this.rua = rua;
 		this.numero = numero;
 		this.cep = cep;
@@ -45,11 +45,11 @@ public class Endereco {
 		this.rua = rua;
 	}
 
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
