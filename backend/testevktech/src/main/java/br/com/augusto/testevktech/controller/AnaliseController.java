@@ -52,4 +52,9 @@ public class AnaliseController {
 		return analiseService.imc(analiseHash);
 	}	
 
+	@GetMapping("/{analiseHash}/sobrepeso")
+	public ResponseEntity<?> sobrepeso(@PathVariable String analiseHash){
+		return analiseService.sobrepeso(analiseHash);
+	}
+	
 }

@@ -64,4 +64,9 @@ public class AnaliseService {
 		return ResponseEntity.status(HttpStatus.OK).body(imcService.imcPorEtaria(pessoas));
 	}
 
+	public ResponseEntity<?> sobrepeso(String analiseHash) {
+		List<Pessoa> pessoas =  pessoaService.findByAnaliseHash(analiseHash);
+		return ResponseEntity.status(HttpStatus.OK).body(imcService.sobrepesoPorSexo(pessoas));
+	}
+
 }
