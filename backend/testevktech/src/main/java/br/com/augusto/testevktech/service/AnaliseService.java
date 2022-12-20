@@ -77,4 +77,9 @@ public class AnaliseService {
 		return tipoSanguineoService.idadePorSangue(pessoas);
 	}
 
+	public ResponseEntity<?> receptores(String analiseHash) {
+		List<Pessoa> pessoas =  pessoaService.findByAnaliseHash(analiseHash);
+		return tipoSanguineoService.receptores(pessoas);
+	}
+
 }

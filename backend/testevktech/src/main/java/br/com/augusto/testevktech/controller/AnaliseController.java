@@ -62,4 +62,9 @@ public class AnaliseController {
 		return analiseService.idadePorSangue(analiseHash);
 	}
 	
+	@GetMapping("/{analiseHash}/receptores")
+	public ResponseEntity<?> receptores(@PathVariable String analiseHash){
+		return analiseService.receptores(analiseHash);
+	}
+	
 }
