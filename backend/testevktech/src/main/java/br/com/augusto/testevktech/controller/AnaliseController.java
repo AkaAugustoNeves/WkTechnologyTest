@@ -57,4 +57,9 @@ public class AnaliseController {
 		return analiseService.sobrepeso(analiseHash);
 	}
 	
+	@GetMapping("/{analiseHash}/idadePorSangue")
+	public ResponseEntity<?> idadePorSangue(@PathVariable String analiseHash){
+		return analiseService.idadePorSangue(analiseHash);
+	}
+	
 }

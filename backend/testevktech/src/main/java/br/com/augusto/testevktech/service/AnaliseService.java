@@ -25,14 +25,16 @@ public class AnaliseService {
 	private PessoaService pessoaService;  
 	private EstadoService estadoService;
 	private IMCService imcService;
+	private TipoSanguineoService tipoSanguineoService;
 	
 	@Autowired
-	public AnaliseService(JsonService jsonService, AnaliseRepository analiseRepository, PessoaService pessoaService, EstadoService estadoService, IMCService imcService) {
+	public AnaliseService(JsonService jsonService, AnaliseRepository analiseRepository, PessoaService pessoaService, EstadoService estadoService, IMCService imcService, TipoSanguineoService tipoSanguineoService) {
 		this.jsonService = jsonService;
 		this.analiseRepository = analiseRepository;
 		this.pessoaService = pessoaService;
 		this.estadoService = estadoService;
 		this.imcService = imcService;
+		this.tipoSanguineoService = tipoSanguineoService;
 	}
 
 	public ResponseEntity<?> register(MultipartFile arquivo) {
@@ -67,6 +69,12 @@ public class AnaliseService {
 	public ResponseEntity<?> sobrepeso(String analiseHash) {
 		List<Pessoa> pessoas =  pessoaService.findByAnaliseHash(analiseHash);
 		return ResponseEntity.status(HttpStatus.OK).body(imcService.sobrepesoPorSexo(pessoas));
+	}
+	
+
+	public ResponseEntity<?> idadePorSangue(String analiseHash) {
+		List<Pessoa> pessoas =  pessoaService.findByAnaliseHash(analiseHash);
+		return tipoSanguineoService.idadePorSangue(pessoas);
 	}
 
 }
