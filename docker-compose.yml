@@ -16,6 +16,17 @@ services:
     networks:
       - db
 
+  backend:
+    container_name: backend
+    build: ./backend/testevktech
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    networks:
+      - db
+    depends_on:
+      - db
+
 networks:
   db:
     driver: bridge
