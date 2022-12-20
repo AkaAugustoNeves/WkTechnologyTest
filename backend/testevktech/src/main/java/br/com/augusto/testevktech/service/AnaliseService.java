@@ -13,6 +13,7 @@ import br.com.augusto.testevktech.model.dto.ManchaEstadoDTO;
 import br.com.augusto.testevktech.model.entity.Analise;
 import br.com.augusto.testevktech.model.entity.Estado;
 import br.com.augusto.testevktech.model.entity.Pessoa;
+import br.com.augusto.testevktech.model.enuns.FaixaEtaria;
 import br.com.augusto.testevktech.model.form.PessoaForm;
 import br.com.augusto.testevktech.repository.AnaliseRepository;
 
@@ -23,13 +24,15 @@ public class AnaliseService {
 	private AnaliseRepository analiseRepository;
 	private PessoaService pessoaService;  
 	private EstadoService estadoService;
+	private IMCService imcService;
 	
 	@Autowired
-	public AnaliseService(JsonService jsonService, AnaliseRepository analiseRepository, PessoaService pessoaService, EstadoService estadoService) {
+	public AnaliseService(JsonService jsonService, AnaliseRepository analiseRepository, PessoaService pessoaService, EstadoService estadoService, IMCService imcService) {
 		this.jsonService = jsonService;
 		this.analiseRepository = analiseRepository;
 		this.pessoaService = pessoaService;
 		this.estadoService = estadoService;
+		this.imcService = imcService;
 	}
 
 	public ResponseEntity<?> register(MultipartFile arquivo) {
@@ -40,9 +43,9 @@ public class AnaliseService {
 		return  ResponseEntity.status(HttpStatus.OK).body(analise.getHash());
 	}
 
-	public ResponseEntity<?> mancha(String hashAnalise) {
+	public ResponseEntity<?> mancha(String analiseHash) {
 		List<ManchaEstadoDTO> mancha = new ArrayList<>();
-		List<Pessoa> pessoas =  pessoaService.findByAnaliseHash(hashAnalise);
+		List<Pessoa> pessoas =  pessoaService.findByAnaliseHash(analiseHash);
 		List<Estado> estados = estadoService.findAll();
 		for(Estado estado: estados) {
 			int quantidade = 0;
@@ -54,6 +57,11 @@ public class AnaliseService {
 			mancha.add(new ManchaEstadoDTO(estado.getUf(), quantidade));
 		}
 		return ResponseEntity.ok(mancha);
+	}
+
+	public ResponseEntity<?> imc(String analiseHash) {
+		List<Pessoa> pessoas =  pessoaService.findByAnaliseHash(analiseHash);
+		return ResponseEntity.status(HttpStatus.OK).body(imcService.imcPorEtaria(pessoas));
 	}
 
 }

@@ -47,5 +47,9 @@ public class AnaliseController {
 		return analiseService.mancha(analiseHash);
 	}
 	
+	@GetMapping("/{analiseHash}/imc")
+	public ResponseEntity<?> imc(@PathVariable String analiseHash){
+		return analiseService.imc(analiseHash);
+	}	
 
 }

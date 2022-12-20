@@ -1,5 +1,8 @@
 package br.com.augusto.testevktech.model.entity;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +58,7 @@ public class Pessoa {
 	
 	public Pessoa(PessoaForm form, Endereco endereco, Fisico fisico, Analise analise) {
 		this.nome = form.getNome();
-		//this.dataNacimento = form.getData_nasc();
+		this.dataNacimento = form.getData_nasc();
 		this.sexo = form.getSexo();
 		this.endereco = endereco;
 		this.tipoSanguineo = form.getTipo_sanguineo();
@@ -150,7 +153,14 @@ public class Pessoa {
 	public void setFisico(Fisico fisico) {
 		this.fisico = fisico;
 	}
-	
-	
+
+	public int calcularIdade() {
+		LocalDate localDate = dataNacimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return Period.between(localDate, LocalDate.now()).getYears();
+	}
+
+	public float calcularImc() {
+		return fisico.getPeso()/(fisico.getAltura()*fisico.getAltura());
+	}	
 	
 }
