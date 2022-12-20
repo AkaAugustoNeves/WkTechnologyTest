@@ -49,6 +49,10 @@ public class Pessoa {
 	@OneToMany(mappedBy = "pessoa")
 	private List<Contato> contatos = new ArrayList<>();
 
+	public Pessoa() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Pessoa(PessoaForm form, Endereco endereco, Fisico fisico, Analise analise) {
 		this.nome = form.getNome();
 		//this.dataNacimento = form.getData_nasc();

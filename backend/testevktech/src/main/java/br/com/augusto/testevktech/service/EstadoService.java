@@ -1,5 +1,6 @@
 package br.com.augusto.testevktech.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class EstadoService {
 	
 	private Estado register(String uf) {
 		return estadoRepository.save(new Estado(uf));
+	}
+	
+	public List<Estado> findAll(){
+		return estadoRepository.findAll();
 	}
 	
 }

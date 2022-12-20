@@ -55,4 +55,8 @@ public class PessoaService {
 		
 	}
 	
+	public List<Pessoa> findByAnaliseHash(String hash){
+		return pessoaRepository.findByAnaliseHash(hash);
+	}
+	
 }
